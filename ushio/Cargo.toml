@@ -1,0 +1,28 @@
+[package]
+name = "ushio"
+version = "0.1.0"
+authors = ["yjHiiragi <tuyijie20180708@outlook.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+ushio-geom = { path = "../ushio-geom" }
+lazy_static = "1.4"
+crossbeam = "0.8"
+dashmap = "4.0"
+winit = "0.25"
+ash = "0.33"
+ash-window = "0.7"
+vk-mem = "0.2"
+serde = "1.0"
+serde_json = "1.0"
+base64 = "0.13"
+image = "0.23"
+thiserror = "1.0"
+log = "0.4"
+
+[features]
+default = ["renderer-phong", "validation"]
+renderer-phong = []
+validation = []
