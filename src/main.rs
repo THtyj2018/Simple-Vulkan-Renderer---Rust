@@ -191,9 +191,9 @@ impl GlobalScript for Script {
         if let Some(plaster) = self.plaster.root.clone() {
             nodes.push(plaster);
         }
-        if let Some(torus) = self.torus.root.clone() {
-            nodes.push(torus);
-        }
+        // if let Some(torus) = self.torus.root.clone() {
+        //     nodes.push(torus);
+        // }
         Scene {
             nodes,
             camera: self.camera.clone(),
