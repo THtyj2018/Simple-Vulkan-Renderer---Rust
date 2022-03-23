@@ -22,5 +22,5 @@ My simple renderer in rust based on vulkan, aiming at learning vulkan and 3D ren
 + Node, mesh and material definitions inspired by glTF2.0
 
 ## Screenshot
-![image](./Screenshot.jpg)
+![Screenshot](./Screenshot.jpg)
 <b>NOTE</b>: Used assets are <b>not</b> included in this repo.

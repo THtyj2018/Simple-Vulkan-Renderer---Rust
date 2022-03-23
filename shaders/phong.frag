@@ -1,9 +1,22 @@
 #version 450
 
 #extension GL_ARB_separate_shader_objects : enable
-#extension GL_GOOGLE_include_directive : enable
 
-#include "phong.h.glsl"
+layout(std140, set=0, binding=1) uniform LightInfo {
+    mat4 matrix;
+    vec3 direction;
+    vec4 color;
+    float ambient;
+    float intensity;
+} light;
+
+layout(std140, set=2, binding=0) uniform MaterialInfo {
+    vec4 base_color;
+    int base_color_map_index;
+    int normal_map_index;
+    float normal_scale;
+    float specular;
+} material;
 
 layout(set=0, binding=2) uniform sampler2D shadow_map;
 layout(set=0, binding=3) uniform samplerCube skybox;

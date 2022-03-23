@@ -1,4 +1,12 @@
-use std::{cell::RefCell, env, path::Path, rc::Rc, sync::{mpsc, Arc}, thread::JoinHandle, time::Instant};
+use std::{
+    cell::RefCell,
+    env,
+    path::Path,
+    rc::Rc,
+    sync::{mpsc, Arc},
+    thread::JoinHandle,
+    time::Instant,
+};
 
 use ushio::{
     launch,
@@ -95,7 +103,6 @@ struct Script {
     marisa: AsyncModel,
     ground: AsyncModel,
     plaster: AsyncModel,
-    torus: AsyncModel,
     skybox: AsyncSkybox,
     camera: Rc<RefCell<SceneNode>>,
     light: Rc<RefCell<SceneNode>>,
@@ -149,16 +156,11 @@ impl GlobalScript for Script {
         });
 
         Script {
-            barbara: AsyncModel::new(
-                "D:/Desktop/Create/mmd/models/Genshin/芭芭拉_闪耀协奏/gltf2/barbara.gltf",
-            ),
+            barbara: AsyncModel::new("assets/barbara_natsu/barbara.gltf"),
             seele: AsyncModel::new("assets/seele_natsu/seele.gltf"),
-            marisa: AsyncModel::new(
-                "D:/Desktop/Create/mmd/models/Touhou/霧雨魔理沙/gltf/marisa.gltf",
-            ),
+            marisa: AsyncModel::new("assets/marisa/marisa.gltf"),
             ground,
             plaster: AsyncModel::new("assets/plaster/plaster.gltf"),
-            torus: AsyncModel::new("assets/torus/metal_torus.gltf"),
             skybox,
             camera: SceneNode::new_empty(),
             light: SceneNode::new_light(Light::directional(Color::white(), 0.85)),
@@ -191,9 +193,6 @@ impl GlobalScript for Script {
         if let Some(plaster) = self.plaster.root.clone() {
             nodes.push(plaster);
         }
-        // if let Some(torus) = self.torus.root.clone() {
-        //     nodes.push(torus);
-        // }
         Scene {
             nodes,
             camera: self.camera.clone(),
@@ -211,7 +210,6 @@ impl GlobalScript for Script {
         self.seele.update();
         self.marisa.update();
         self.plaster.update();
-        self.torus.update();
         self.ground.update();
         self.skybox.update();
 
@@ -237,15 +235,6 @@ impl GlobalScript for Script {
                 Default::default(),
                 Vec3::one(),
             ));
-        }
-
-        if let Some(torus) = self.torus.root.as_ref() {
-            torus.borrow_mut().set_transform(Transform::lookat(
-                Vec3::new(0.5, 1.8, 2.0),
-                Vec3::zero(),
-                Vec3::pos_y(),
-            ));
-            torus.borrow_mut().set_scale(Vec3::one() * 0.7);
         }
 
         let mut camera = self.camera.borrow_mut();

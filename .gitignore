@@ -3,3 +3,4 @@
 /*.log
 /tmp
 /assets
+/Cargo.lock
